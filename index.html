@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GPS Data Collector</title>
+  <title>GPS Data Collector 🌐</title>
   <style>
     * {
       margin: 0;
@@ -13,7 +13,7 @@
     
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -22,23 +22,23 @@
     }
     
     .container {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      padding: 40px;
-      max-width: 500px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+      padding: 35px;
+      max-width: 520px;
       width: 100%;
     }
     
     .header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
     
     .header h1 {
       font-size: 28px;
-      color: #333;
-      margin-bottom: 10px;
+      color: #222;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -46,11 +46,11 @@
     }
     
     .icon-large {
-      font-size: 36px;
+      font-size: 38px;
     }
     
     .subtitle {
-      color: #666;
+      color: #555;
       font-size: 14px;
     }
     
@@ -58,19 +58,19 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 15px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
     
     .stat-card {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      padding: 20px;
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      padding: 18px;
       border-radius: 15px;
       color: white;
       text-align: center;
     }
     
     .stat-card.alt {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     }
     
     .stat-label {
@@ -80,19 +80,20 @@
     }
     
     .stat-value {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
     }
-    
+
     .controls {
       display: flex;
       gap: 10px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
     }
     
     .btn {
       flex: 1;
-      padding: 15px;
+      padding: 14px;
       border: none;
       border-radius: 12px;
       font-size: 16px;
@@ -104,15 +105,15 @@
       justify-content: center;
       gap: 8px;
     }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    }
     
     .btn-start {
       background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
       color: white;
-    }
-    
-    .btn-start:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(17, 153, 142, 0.4);
     }
     
     .btn-stop {
@@ -120,21 +121,18 @@
       color: white;
     }
     
-    .btn-stop:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(238, 9, 121, 0.4);
-    }
-    
     .btn-download {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       width: 100%;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
-    
-    .btn-download:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+
+    .btn-clear {
+      background: linear-gradient(135deg, #8e9eab 0%, #eef2f3 100%);
+      color: #333;
+      width: 100%;
+      margin-bottom: 15px;
     }
 
     .btn-permission {
@@ -145,11 +143,6 @@
       font-weight: 600;
     }
 
-    .btn-permission:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(247, 151, 30, 0.4);
-    }
-
     .btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -158,7 +151,7 @@
     
     .status-bar {
       background: #f8f9fa;
-      padding: 15px;
+      padding: 14px;
       border-radius: 12px;
       margin-bottom: 20px;
       display: flex;
@@ -202,57 +195,51 @@
       width: 8px;
     }
     
-    .log-container::-webkit-scrollbar-track {
-      background: #2d2d2d;
-      border-radius: 4px;
-    }
-    
     .log-container::-webkit-scrollbar-thumb {
       background: #667eea;
       border-radius: 4px;
     }
-    
+
     .log-entry {
       color: #a9b7c6;
       margin-bottom: 8px;
       line-height: 1.5;
     }
-    
-    .log-entry .time {
-      color: #6897bb;
-    }
-    
-    .log-entry .coord {
-      color: #9876aa;
-    }
-    
-    .log-entry .accuracy {
-      color: #6a8759;
-    }
-    
-    .log-entry.error {
-      color: #ff6b6b;
-    }
-    
+
+    .log-entry .time { color: #6897bb; }
+    .log-entry .coord { color: #9876aa; }
+    .log-entry .accuracy { color: #6a8759; }
+    .log-entry.error { color: #ff6b6b; }
+
     .log-header {
       color: #667eea;
       font-weight: bold;
       margin-bottom: 10px;
       font-size: 13px;
     }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 25px;
+      }
+      .btn {
+        font-size: 14px;
+        padding: 12px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1><span class="icon-large">📍</span> GPS Data Collector</h1>
-      <p class="subtitle">Real-time Lat/Lon collection with Accuracy</p>
+      <h1><span class="icon-large">🌐</span> GPS Data Collector</h1>
+      <p class="subtitle">Real-time Latitude & Longitude Collection with Accuracy</p>
     </div>
 
     <button class="btn btn-permission" onclick="requestGPSPermission()">
       🔐 Request GPS Permission
     </button>
-    
+
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-label">Data Points</div>
@@ -263,25 +250,20 @@
         <div class="stat-value" id="duration">00:00</div>
       </div>
     </div>
-    
+
     <div class="status-bar">
       <div class="status-indicator" id="statusIndicator"></div>
       <div class="status-text" id="statusText">Ready to start</div>
     </div>
-    
+
     <div class="controls">
-      <button class="btn btn-start" onclick="startCollection()">
-        ▶ Start
-      </button>
-      <button class="btn btn-stop" onclick="stopCollection()">
-        ⏸ Stop
-      </button>
+      <button class="btn btn-start" onclick="startCollection()">▶ Start</button>
+      <button class="btn btn-stop" onclick="stopCollection()">⏸ Stop</button>
     </div>
-    
-    <button class="btn btn-download" onclick="downloadCSV()">
-      💾 Download Data
-    </button>
-    
+
+    <button class="btn btn-download" onclick="downloadCSV()">💾 Download Data</button>
+    <button class="btn btn-clear" onclick="clearLog()">🧹 Clear Log</button>
+
     <div class="log-container" id="log">
       <div class="log-header">📊 Activity Log</div>
     </div>
@@ -416,6 +398,12 @@
       entry.innerHTML = message;
       logDiv.appendChild(entry);
       logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    function clearLog() {
+      const logDiv = document.getElementById("log");
+      logDiv.innerHTML = '<div class="log-header">📊 Activity Log</div>';
+      addLog("🧹 Log cleared", "info");
     }
 
     function updateDuration() {
